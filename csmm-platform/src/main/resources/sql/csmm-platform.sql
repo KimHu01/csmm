@@ -3,6 +3,8 @@
 # ------------------------------------------------------------
 create database csmm_platform;
 
+use csmm_platform;
+
 # 学生信息表: t_student
 # ------------------------------------------------------------
 drop table if exists `t_student`;
