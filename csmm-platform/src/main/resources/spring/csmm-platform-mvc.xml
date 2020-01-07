@@ -14,7 +14,7 @@
     <!-- 这两个类用来启动基于Spring MVC的注解功能，将控制器与方法映射加入到容器中 -->
     <mvc:annotation-driven>
         <mvc:argument-resolvers>
-            <bean class="com.abel.mainstay.mvc.controller.resolver.ArbitraryMethodArgumentResolver"/>
+            <bean class="com.letsfly.mainstay.mvc.controller.resolver.ArbitraryMethodArgumentResolver"/>
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
     
@@ -30,10 +30,17 @@
     <mvc:resources mapping="/static/**" location="/static/"/>
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+    <mvc:resources mapping="/swagger/**" location="/swagger/"/>
     
     <!-- 自定义拦截器 -->
     <mvc:interceptors>
-        <bean class="com.abel.mainstay.web.interceptor.AbelSystemInterceptor"/>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/swagger*/**"/>
+            <mvc:exclude-mapping path="/v2/**"/>
+            <mvc:exclude-mapping path="/webjars/**"/>
+            <bean class="com.letsfly.mainstay.web.interceptor.AbelSystemInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
     
     <!-- 自动定位jsp页面 -->
