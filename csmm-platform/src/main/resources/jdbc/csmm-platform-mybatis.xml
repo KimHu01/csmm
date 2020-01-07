@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    
+    <typeAliases>
+        <typeAlias alias="timestamp" type="java.sql.Timestamp"/>
+        <typeAlias alias="bigdecimal" type="java.math.BigDecimal"/>
+        <typeAlias alias="hashmap" type="java.util.HashMap"/>
+        <typeAlias alias="long" type="java.lang.Long"/>
+        <typeAlias alias="integer" type="java.lang.Integer"/>
+        <typeAlias alias="list" type="java.util.List"/>
+        <typeAlias alias="date" type="java.util.Date"/>
+        <typeAlias alias="blob" type="java.sql.Blob"/>
+        <typeAlias alias="string" type="java.lang.String"/>
+        <typeAlias alias="map" type="java.util.Map"/>
+        <typeAlias alias="blob2string" type="com.letsfly.mainstay.mvc.dao.handler.Blob2StringHandler"/>
+        <typeAlias alias="String2Json" type="com.letsfly.mainstay.mvc.dao.handler.String2JsonHandler"/>
+    </typeAliases>
+    
+    <plugins>
+        <plugin interceptor="com.letsfly.mainstay.mvc.page.interceptor.PaginationInterceptor">
+            <property name="dialect" value="${jdbc.dialect}"/>
+        </plugin>
+    </plugins>
+</configuration>

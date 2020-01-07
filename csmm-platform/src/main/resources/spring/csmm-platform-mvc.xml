@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+    <description>springmvc配置</description>
+    
+    <!-- DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter -->
+    <!-- 这两个类用来启动基于Spring MVC的注解功能，将控制器与方法映射加入到容器中 -->
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="com.abel.mainstay.mvc.controller.resolver.ArbitraryMethodArgumentResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+    
+    <!-- 启动基于Spring MVC的注解功能，将控制器与方法映射加入到容器中 -->
+    <context:component-scan base-package="com.**" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+    <!-- 响应静态资源 -->
+    <mvc:default-servlet-handler/>
+    
+    <!-- 过滤静态资源，如css、图片等进行过滤  -->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+    
+    <!-- 自定义拦截器 -->
+    <mvc:interceptors>
+        <bean class="com.abel.mainstay.web.interceptor.AbelSystemInterceptor"/>
+    </mvc:interceptors>
+    
+    <!-- 自动定位jsp页面 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    
+    <!-- 上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="-1"/>
+    </bean>
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+    <description>spring容器配置</description>
+    
+    <!-- Spring容器注册 -->
+    <context:annotation-config/>
+    
+    <!-- Spring包扫描 -->
+    <context:component-scan base-package="com.**">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+    <!-- 为Spring声明一个自动代理 -->
+    <aop:aspectj-autoproxy expose-proxy="true"/>
+    
+    <!-- SpringContext -->
+    <bean class="com.letsfly.mainstay.spring.SpringContext"/>
+    
+    <!-- 加载配置文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc/jdbc.properties</value>
+                <value>classpath:redis/jedis.properties</value>
+                <value>classpath:swagger/swagger.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- jdbc -->
+    <import resource="classpath:jdbc/csmm-platform-jdbc.xml"/>
+    
+    <!-- redis -->
+    <!-- <import resource="classpath*:META-INF/jedis/letsfly-redis-jedis-sentinel.xml"/> -->
+</beans>

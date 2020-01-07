@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abel.ice.fire.student.dao.StudentDao">
+    <resultMap id="baseResultMap" type="com.abel.ice.fire.student.model.StudentDO">
+        <result property="stuId" column="stu_id" javaType="string" jdbcType="VARCHAR"/>
+        
+        <result property="name" column="name" javaType="string" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" javaType="integer" jdbcType="SMALLINT"/>
+        <result property="age" column="age" javaType="integer" jdbcType="INTEGER"/>
+        
+        <result property="isDel" column="is_del" javaType="Integer" jdbcType="TINYINT"/>
+        <result property="gmtCreated" column="gmt_created" javaType="timestamp" jdbcType="TIMESTAMP"/>
+        <result property="gmtModified" column="gmt_modified" javaType="timestamp" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="columns">
+        tt.stu_id, tt.name, tt.gender, tt.age, tt.is_del, tt.gmt_created, tt.gmt_modified
+    </sql>
+    
+    <sql id="where">
+        <where>
+            <if test="stuId != null">and tt.stu_id = #{stuId}</if>
+            <if test="name != null">and tt.name = #{name}</if>
+            <if test="gender != null">and tt.gender = #{gender}</if>
+            <if test="age != null">and tt.age = #{age}</if>
+            
+            <if test="isDel != null">and tt.isDel = #{isDel}</if>
+            <if test="gmtCreated != null">and tt.gmt_created = #{gmtCreated}</if>
+            <if test="gmtModified != null">and tt.gmt_modified = #{gmtModified}</if>
+        </where>
+    </sql>
+    
+    <sql id="wherePage">
+        <where>
+            <if test="param.stuId != null">and tt.stu_id = #{param.stuId}</if>
+            <if test="param.name != null">and tt.name = #{param.name}</if>
+            <if test="param.gender != null">and tt.gender = #{param.gender}</if>
+            <if test="param.age != null">and tt.age = #{param.age}</if>
+            
+            <if test="param.isDel != null">and tt.isDel = #{param.isDel}</if>
+            <if test="param.gmtCreated != null">and tt.gmt_created = #{param.gmtCreated}</if>
+            <if test="param.gmtModified != null">and tt.gmt_modified = #{param.gmtModified}</if>
+        </where>
+    </sql>
+    
+    <sql id="oderBy">
+        order by tt.gmt_created desc
+    </sql>
+    
+    <sql id="set">
+        <set>
+            <if test="name != null">tt.name = #{name},</if>
+            <if test="gender != null">tt.gender = #{gender},</if>
+            <if test="age != null">tt.age = #{age,}</if>
+            
+            <if test="isDel != null">tt.isDel = #{isDel},</if>
+            <if test="gmtModified != null">tt.gmt_modified = #{gmtModified},</if>
+        </set>
+    </sql>
+    
+    <insert id="insert" parameterType="com.abel.ice.fire.student.model.StudentDO">
+        insert into t_student 
+            (stu_id, name, gender, age, is_del, gmt_created, gmt_modified) 
+        values 
+            (#{stuId}, #{name}, #{gender}, #{age}, #{isDel}, #{gmtCreated}, #{gmtModified})
+    </insert>
+    
+    <select id="selectListByModel" parameterType="com.abel.ice.fire.student.model.StudentDO" resultMap="baseResultMap">
+        select <include refid="columns"/> from t_student tt <include refid="where"/>
+    </select>
+    
+    <select id="selectById" parameterType="string" resultMap="baseResultMap">
+        select <include refid="columns"/> from t_student tt where tt.stu_id = #{stuId}
+    </select>
+    
+    <update id="update" parameterType="com.abel.ice.fire.student.model.StudentDO">
+        update t_student tt <include refid="set"/> where tt.stu_id = #{stuId}
+    </update>
+    
+    <select id="selectListByPage" parameterType="com.abel.mainstay.mvc.page.Pagination" resultMap="baseResultMap">
+        select <include refid="columns"/> from t_student tt <include refid="wherePage"/> <include refid="oderBy"/>
+    </select>
+</mapper>
