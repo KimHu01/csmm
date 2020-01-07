@@ -74,7 +74,7 @@
                 
                 <p.csmm.jdbc.driver.class.name>com.mysql.cj.jdbc.Driver</p.csmm.jdbc.driver.class.name>
                 <p.csmm.jdbc.url>
-                    <![CDATA[ jdbc:mysql://127.0.0.1:3306/csmm_platform?useUnicode=true&characterEncoding=utf-8&ssl=true ]]>
+                    <![CDATA[ jdbc:mysql://119.3.182.166:3306/csmm_platform?useUnicode=true&characterEncoding=utf-8&ssl=true ]]>
                 </p.csmm.jdbc.url>
                 <p.csmm.jdbc.username>root</p.csmm.jdbc.username>
                 <p.csmm.jdbc.password>5C4OJ0zGgEu6Ro!</p.csmm.jdbc.password>
