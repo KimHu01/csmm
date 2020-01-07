@@ -76,7 +76,7 @@
                 <p.csmm.jdbc.url>
                     <![CDATA[ jdbc:mysql://119.3.182.166:3306/csmm_platform?useUnicode=true&characterEncoding=utf-8&ssl=true ]]>
                 </p.csmm.jdbc.url>
-                <p.csmm.jdbc.username>root</p.csmm.jdbc.username>
+                <p.csmm.jdbc.username>csmm</p.csmm.jdbc.username>
                 <p.csmm.jdbc.password>5C4OJ0zGgEu6Ro!</p.csmm.jdbc.password>
                 
                 <p.redis.jedis.addresses>192.168.10.56:26379,192.168.10.96:26379,192.168.10.126:26379</p.redis.jedis.addresses>
