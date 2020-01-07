@@ -70,7 +70,7 @@
     </delete>
     
     <update id="update" parameterType="com.letsfly.csmm.platform.student.model.StudentDO">
-        update stu <include refid="set"/> from t_student stu where stu.stu_id = #{stuId}
+        update t_student stu <include refid="set"/> where stu.stu_id = #{stuId}
     </update>
     
     <select id="selectById" parameterType="string" resultMap="baseResultMap">
