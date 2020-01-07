@@ -26,7 +26,7 @@ public class StudentDO extends AbstractDO implements Serializable {
     /** 年龄 */
     private Integer age;
     
-    /** 是否删除 */
+    /** 是否可用(0/1:否/是) */
     private Integer enabled;
     
     /** 创建时间 */
