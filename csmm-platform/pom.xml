@@ -22,11 +22,11 @@
             <artifactId>letsfly-monomer</artifactId>
             <version>1.0.1</version>
         </dependency>
-        <!-- <dependency>
+        <dependency>
             <groupId>com.letsfly.redis</groupId>
             <artifactId>letsfly-redis</artifactId>
             <version>1.0.1</version>
-        </dependency> -->
+        </dependency>
         
         <!-- javax -->
         <dependency>
