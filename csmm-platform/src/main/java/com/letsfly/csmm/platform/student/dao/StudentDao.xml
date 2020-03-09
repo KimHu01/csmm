@@ -84,4 +84,8 @@
     <select id="selectListByPage" parameterType="com.letsfly.mainstay.mvc.page.Pagination" resultMap="baseResultMap">
         select <include refid="columns"/> from t_student stu <include refid="wherePage"/> <include refid="oderBy"/>
     </select>
+    
+    <select id="selectByName" parameterType="string" resultMap="baseResultMap">
+        select * from t_student stu where stu.name = #{name}
+    </select>
 </mapper>

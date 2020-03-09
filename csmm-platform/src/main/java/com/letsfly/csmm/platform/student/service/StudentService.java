@@ -34,4 +34,12 @@ public interface StudentService extends Service<StudentDO> {
      * @throws CoreException
      */
     Pagination<StudentDO> selectPageListByJson(Integer pageNum, Integer pageSize, StudentDO student) throws CoreException;
+    
+    /**
+     * 根据名字查询学生
+     * @param name
+     * @return
+     * @throws CoreException
+     */
+    List<StudentDO> selectByName(String name) throws CoreException;
 }

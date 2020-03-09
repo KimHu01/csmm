@@ -184,4 +184,16 @@ public class StudentController extends AbstractMonomerController {
         Pagination<StudentDO> pagination = studentService.selectPageListByJson(pageNum, pageSize, student);
         return HttpResult.ofSuccess(pagination);
     }
+    
+    /**
+     * 根据名字查询学生
+     * @param name
+     * @return
+     */
+    @ApiOperation(value="根据名字查询学生")
+    @GetMapping("/selectByName")
+    public Object selectByName(@RequestParam String name) {
+        List<StudentDO> students = studentService.selectByName(name);
+        return HttpResult.ofSuccess(students);
+    }
 }
