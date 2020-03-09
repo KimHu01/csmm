@@ -67,11 +67,11 @@
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>com.letsfly.mainstay.web.DispatcherServletDS</servlet-class>
-        <load-on-startup>1</load-on-startup>
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:spring/csmm-platform-mvc.xml</param-value>
         </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
