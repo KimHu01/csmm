@@ -59,4 +59,19 @@ public class StudentServiceImpl extends AbstractService<StudentDO, StudentDao> i
         
         return super.selectListByPage(new Pagination<StudentDO>(pageNum, pageSize, student));
     }
+    
+    /**
+     * 根据名字查询学生
+     * @param name
+     * @return
+     * @throws CoreException
+     */
+    @Override
+    public List<StudentDO> selectByName(String name) throws CoreException {
+        if(StringUtil.isEmpty(name)) {
+            throw new CoreException("name can not be null.");
+        }
+        
+        return this.baseDao.selectByName(name);
+    }
 }
