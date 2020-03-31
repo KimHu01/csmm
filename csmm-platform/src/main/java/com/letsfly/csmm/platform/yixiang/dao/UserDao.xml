@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.letsfly.csmm.platform.yixiang.dao.UserDao">
+    
+    <resultMap id="baseResultMap" type="com.letsfly.csmm.platform.yixiang.model.UserDO">
+        <result property="userId" column="user_id" javaType="string" jdbcType="VARCHAR"/>
+        
+        <result property="name" column="name" javaType="string" jdbcType="VARCHAR"/>
+        <result property="username" column="username" javaType="string" jdbcType="VARCHAR"/>
+        <result property="password" column="password" javaType="string" jdbcType="VARCHAR"/>
+        
+        <result property="gender" column="gender" javaType="integer" jdbcType="INTEGER"/>
+        <result property="age" column="age" javaType="integer" jdbcType="INTEGER"/>
+        
+        <result property="enabled" column="enabled" javaType="Integer" jdbcType="TINYINT"/>
+        <result property="gmtCreated" column="gmt_created" javaType="timestamp" jdbcType="TIMESTAMP"/>
+        <result property="gmtModified" column="gmt_modified" javaType="timestamp" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+        <sql id="set">
+        	<set>
+        		<if test="username != null">user.username = #{username},</if>
+        		<if test="password != null">user.password = #{password},</if>
+            	<if test="name != null">user.name = #{name},</if>
+            	<if test="gender != null">user.gender = #{gender},</if>
+            	<if test="age != null">user.age = #{age},</if>
+            
+            	<if test="enabled != null">user.enabled = #{enabled},</if>
+            	<if test="gmtModified != null">user.gmt_modified = #{gmtModified},</if>
+        	</set>
+    	</sql>
+    
+    
+    
+    
+    <insert id="insert" parameterType="com.letsfly.csmm.platform.yixiang.model.UserDO">
+        insert into t_user 
+            (user_id, username, password, gender, age, enabled, gmt_created, gmt_modified) 
+        values 
+            (#{userId}, #{username}, #{password}, #{gender}, #{age}, #{enabled}, #{gmtCreated}, #{gmtModified})
+    </insert>
+    
+    <update id="update" parameterType="com.letsfly.csmm.platform.yixiang.model.UserDO">
+    	update t_user user <include refid="set"/> where user.user_id = #{userId}
+    </update>
+    
+    <delete id="deleteById" parameterType="string">
+    	 delete user from t_user user where user.user_id = #{userId}
+    </delete>
+    
+    <select id="selectByName" parameterType="string" resultMap="baseResultMap">
+        select * from t_user where name = #{name}
+    </select>
+    
+</mapper>
