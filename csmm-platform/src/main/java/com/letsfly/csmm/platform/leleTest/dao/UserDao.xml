@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.letsfly.csmm.platform.leleTest.dao.UserDao">
+    <resultMap id="baseResultMap" type="com.letsfly.csmm.platform.leleTest.model.UserDO">
+        <result property="userId" column="user_id" javaType="string" jdbcType="VARCHAR"/>
+        
+        <result property="name" column="name" javaType="string" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" javaType="integer" jdbcType="INTEGER"/>
+        <result property="age" column="age" javaType="integer" jdbcType="INTEGER"/>
+        
+        <result property="enabled" column="enabled" javaType="Integer" jdbcType="TINYINT"/>
+        <result property="gmtCreated" column="gmt_created" javaType="timestamp" jdbcType="TIMESTAMP"/>
+        <result property="gmtModified" column="gmt_modified" javaType="timestamp" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="columns">
+        user.user_id, user.name, user.gender, user.age, user.enabled, user.gmt_created, user.gmt_modified
+    </sql>
+    
+    <sql id="where">
+        <where>
+            <if test="userId != null">and user.user_id = #{userId}</if>
+            <if test="name != null">and user.name = #{name}</if>
+            <if test="gender != null">and user.gender = #{gender}</if>
+            <if test="age != null">and user.age = #{age}</if>
+            
+            <if test="enabled != null">and user.enabled = #{enabled}</if>
+            <if test="gmtCreated != null">and user.gmt_created = #{gmtCreated}</if>
+            <if test="gmtModified != null">and user.gmt_modified = #{gmtModified}</if>
+        </where>
+    </sql>
+    
+    <sql id="wherePage">
+        <where>
+            <if test="param.userId != null">and user.user_id = #{param.userId}</if>
+            <if test="param.name != null">and user.name = #{param.name}</if>
+            <if test="param.gender != null">and user.gender = #{param.gender}</if>
+            <if test="param.age != null">and user.age = #{param.age}</if>
+            
+            <if test="param.enabled != null">and user.enabled = #{param.enabled}</if>
+            <if test="param.gmtCreated != null">and user.gmt_created = #{param.gmtCreated}</if>
+            <if test="param.gmtModified != null">and user.gmt_modified = #{param.gmtModified}</if>
+        </where>
+    </sql>
+    
+    <sql id="oderBy">
+        order by user.gmt_created desc
+    </sql>
+    
+    <sql id="set">
+        <set>
+            <if test="name != null">user.name = #{name},</if>
+            <if test="gender != null">user.gender = #{gender},</if>
+            <if test="age != null">user.age = #{age},</if>
+            
+            <if test="enabled != null">user.enabled = #{enabled},</if>
+            <if test="gmtModified != null">user.gmt_modified = #{gmtModified},</if>
+        </set>
+    </sql>
+    <select id="selectById" parameterType="string" resultMap="baseResultMap">
+        select <include refid="columns"/> from t_user user where user.user_id = #{userId}
+    </select>
+    <insert id="insert" parameterType="com.letsfly.csmm.platform.leleTest.model.UserDO">
+        insert into t_user 
+            (user_id, name, gender, age, enabled, gmt_created, gmt_modified) 
+        values 
+            (#{userId}, #{name}, #{gender}, #{age}, #{enabled}, #{gmtCreated}, #{gmtModified})
+    </insert>
+    
+    <delete id="deleteById" parameterType="string">
+        delete user from t_user user where user.user_id = #{userId}
+    </delete>
+    
+    <update id="update" parameterType="com.letsfly.csmm.platform.leleTest.model.UserDO">
+        update t_user user <include refid="set"/> where user.user_id = #{userId}
+    </update>
+</mapper>
